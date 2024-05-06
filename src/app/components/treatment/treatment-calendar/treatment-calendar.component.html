@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Treatment Rooms</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <button type="button" class="btn btn-sm btn-primary me-2" [disabled]="!addBooking" (click)="addTreatment()">Add
+      Booking</button>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-primary" [disabled]="!editBooking"
+        (click)="editTreatment()">Edit</button>
+      <button type="button" class="btn btn-sm btn-danger" [disabled]="!editBooking"
+        (click)="deleteTreatment()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="card">
+    <div class="card-header bg-body-tertiary py-3">
+      <h6 class="mb-0">Treatment Rooms Slots</h6>
+    </div>
+    <div class="card-body">
+      <div class="room-container d-flex flex-grow-1">
+        <div class="force-grow-1"></div>
+        <div class="d-flex force-grow-9">
+          <div class="force-grow-2"></div>
+          <div class="force-grow-8 d-flex">
+            <div style="flex-basis: 100%;" class="me-2 text-center" *ngFor="let room of rooms;">
+              <span class="fw-bold text-muted"><small>{{room.name}}</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let dateSlot of slotMonth?.dateSlots; let di = index;" class="d-flex flex-column">
+        <div class="d-flex flex-grow-1">
+          <div class="d-flex align-self-stretch force-grow-1">
+            <div class="d-flex flex-column align-self-center">
+              <span><strong>{{dateSlot.dayOfWeek}}</strong></span>
+              <h5>{{slotMonth?.month}}, {{dateSlot.dayOfMonth}}</h5>
+            </div>
+          </div>
+          <div class="d-flex flex-column force-grow-9">
+            <div class="d-flex flex-grow-1" *ngFor="let timeSlot of dateSlot.timeSlots;">
+              <div class="d-flex force-grow-2">
+                <span><small>{{timeSlot.startTime}} - {{timeSlot.endTime}}</small></span>
+              </div>
+              <div class="d-flex force-grow-9">
+                <div *ngFor="let room of rooms;" style="flex-basis: 100%;"
+                  class="d-flex align-items-center justify-content-center slot-brick me-2 mt-2 slot-brick--{{slotStatus[slotStatusKey(dateSlot.dayOfMonth, timeSlot.startTime, room.name)]}}"
+                  (click)="selectSlot(dateSlot.dayOfMonth, timeSlot.startTime, timeSlot.endTime, room.name)">
+
+                  <span
+                    *ngIf="slotStatus[slotStatusKey(dateSlot.dayOfMonth, timeSlot.startTime, room.name)] == 'BOOKED'">
+                    <small class="fw-semibold">BOOKED</small>
+                  </span>
+
+                  <span
+                    *ngIf="slotStatus[slotStatusKey(dateSlot.dayOfMonth, timeSlot.startTime, room.name)] == 'BOOKEDSELECTED'">
+                    <small class="fw-semibold">BOOKED</small>
+                  </span>
+
+                  <span
+                    *ngIf="slotStatus[slotStatusKey(dateSlot.dayOfMonth, timeSlot.startTime, room.name)] == 'SELECTED'">
+                    <small class="fw-semibold">SELECTED</small>
+                  </span>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="date-space d-flex flex-grow-1 mt-3 mb-2"
+          *ngIf="slotMonth && slotMonth.dateSlots && di < slotMonth.dateSlots.length - 1">
+          <div class="force-grow-1 date-space-border"></div>
+          <div class="d-flex force-grow-9">
+            <div class="force-grow-2 date-space-border me-14"></div>
+            <div class="force-grow-8"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer bg-body-tertiary py-2">
+      <div class="row flex-between-center">
+        <div class="col-auto"><select class="form-select form-select-sm audience-select-menu">
+            <option value="week" selected="selected">Last 7 days</option>
+            <option value="month">Last month</option>
+            <option value="year">Last Year</option>
+          </select></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #tolTemplate>Just another: {{hoverBooking?.bookingId}}</ng-template>

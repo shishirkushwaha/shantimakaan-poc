@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Add Booking</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <form *ngIf="bookingForm" class="row g-3" [formGroup]="bookingForm">
+    <div class="col-12">
+      <label for="date" class="form-label">Booking Date</label>
+      <input type="text" class="form-control" readonly formControlName="date">
+    </div>
+    <div class="col-md-6">
+      <label for="startTime" class="form-label">Start Time</label>
+      <input type="text" class="form-control" readonly formControlName="startTime">
+    </div>
+    <div class="col-md-6">
+      <label for="endTime" class="form-label">End Time</label>
+      <input type="text" class="form-control" readonly formControlName="endTime">
+    </div>
+    <div class="col-md-6">
+      <label for="startTime" class="form-label">Room</label>
+      <input type="text" class="form-control" readonly formControlName="roomName">
+    </div>
+    <div class="col-md-6">
+      <label for="resource" class="form-label">Resource</label>
+      <input type="text" class="form-control" formControlName="resource" placeholder="Enter Resource Name" [typeahead]="resources">
+    </div>
+    <div class="col-12">
+      <label for="treatment" class="form-label">Treatment</label>
+      <textarea class="form-control" rows="2" formControlName="treatment" placeholder="Enter Treatment Details"></textarea>
+    </div>
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-sm btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
+  <button type="button" class="btn btn-sm btn-primary me-2" (click)="add()">Add Booking</button>
+</div>

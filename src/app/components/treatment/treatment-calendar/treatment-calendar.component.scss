@@ -1,0 +1,60 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.slot-brick {
+  border: 1px solid #d8e2ef;
+  min-height: 1.4rem;
+
+  &--AVAILABLE {
+    background-color: var(--bs-success-bg-subtle);
+  }
+
+  &--BOOKED {
+    color: #fff;
+    background-color: var(--bs-danger-border-subtle);
+  }
+
+  &--CHECKEDIN {
+    background-color: var(--bs-warning-border-subtle);
+  }
+
+  &--SELECTED {
+    color: #fff;
+    background-color: RGBA(var(--bs-success-rgb), var(--bs-bg-opacity, 1));
+  }
+
+  &--BOOKEDSELECTED {
+    color: #fff;
+    background-color: RGBA(var(--bs-danger-rgb), var(--bs-bg-opacity, 1));
+  }
+
+  &--UNAVAILABLE {
+    background-color: var(--bs-secondary-bg-subtle);
+  }
+}
+
+.date-space-border {
+  border-bottom: 1px solid #d8e2ef;
+}
+
+.force-grow-1 {
+  flex: 1 1 0;
+}
+
+.force-grow-2 {
+  flex: 2 2 0;
+}
+
+.force-grow-8 {
+  flex: 8 8 0;
+}
+
+.force-grow-9 {
+  flex: 9 9 0;
+}
+
+.me-14 {
+  margin-right: 14rem;
+}
